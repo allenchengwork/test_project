@@ -1,0 +1,19 @@
+version = '1.0.0'
+
+dependencies {
+	compile group: 'commons-collections', name: 'commons-collections', version: '3.2'
+}
+
+jar {
+    manifest {
+        attributes("Implementation-Title": project.name, "Implementation-Version": version, "Implementation-Timestamp": new Date())
+    }
+}
+
+uploadArchives {
+    repositories {
+       flatDir {
+           dirs 'export'
+       }
+    }
+}

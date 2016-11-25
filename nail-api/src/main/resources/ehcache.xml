@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="http://ehcache.org/ehcache.xsd" 
+	updateCheck="true" monitoring="autodetect" dynamicConfig="true">
+	
+	<diskStore path="ehcache.disk.store.dir/ehcache" />
+	
+	<!--
+		name：快取區名稱，用以區別快取區，必須唯一
+		maxElementsInMemory：設置快取在本地內存中最大快取項數量（0 表示無限）
+		maxEntriesLocalHeap：設置快取在本地內存中最大快取項數量（0 表示無限）(new)
+		maxElementsOnDisk：設置保存在本地硬碟中的的最大快取項數量。預設為0，表示數量不限
+		maxEntriesLocalDisk：設置保存在本地硬碟中的的最大快取項數量。預設為0，表示數量不限(new)
+		eternal：如果為true，表示對象永遠不會過期，此時會忽略timeToIdleSeconds和timeToLiveSeconds屬性，預設為false
+		maxBytesLocalHeap：定義保存在Java虛擬機堆內存中的快取項的最大字節數。定義時格式如下<number>k|K|m|M|g|G，
+			其中k|K代表千字節，m|M代表兆字節，g|G代表吉字節。舉例：maxBytesLocalHeap="2g"將使用2G堆內存。
+			此屬性與maxEntriesLocalHeap互斥，指定了此屬性，則不能指定maxEntriesLocalHeap。
+			如果設定過CacheManager的maxBytesLocalHeap屬性，也不能使用此屬性。
+			放入快取的快取項將使用net.sf.ehcache.pool.sizeof.SizeOf方法計算其字節數。
+			如果希望在計算字節數時忽略對象樹種的某些屬性，請參考net.sf.ehcache.pool.sizeof.annotations.IgnoreSizeOf註解
+		maxBytesLocalDisk：和maxBytesLocalHeap屬性類似，不過指定的是存儲在本地硬碟上的快取項最大可使用的字節數
+		timeToIdleSeconds：設定允許對象處於空閒狀態的最長時間，以秒為單位。當對象自從最近一次被訪問後，
+			如果處於空閒狀態的時間超過了timeToIdleSeconds屬性值，這個對象就會過期。當對象過期，
+			EHCache將把它從快取中清空。只有當eternal屬性為false，該屬性才有效。如果該屬性值為0，則表示對象可以無限期地處於空閒狀態
+		timeToLiveSeconds：設定對象允許存在於快取中的最長時間，以秒為單位。當對象自從被存放到快取中後，
+			如果處於快取中的時間超過了timeToLiveSeconds屬性值，這個對象就會過期。當對象過期，
+			EHCache將把它從快取中清除。只有當eternal屬性為false，該屬性才有效。如果該屬性值為0，則表示對象可以無限期地存在於快取中。
+			timeToLiveSeconds必須大於timeToIdleSeconds屬性，才有意義
+		diskExpiryThreadIntervalSeconds：清理保存在硬碟上的過期快取項目的線程的啟動時間間隔，預設120秒
+		diskSpoolBufferSizeMB：硬碟緩衝區的大小。寫入硬碟的內容將緩沖在此區域， 使用異步的方式寫入硬碟。預設30MB，
+			每一個快取區使用獨立的緩衝區，如果遇到OutOfMemory錯誤時，可以嘗試減小這個值。
+			改進硬碟寫入性能時，嘗試增加這個值。將日誌級別開到Trace，當DiskStore執行硬碟寫入時，可以看到對應日誌
+		clearOnFlush：當flush()方法調用時，MemoryStore是否清空其內容，預設為true，即清空
+		statistics：是否收集統計信息。如果需要監控快取使用情況，應該打開這個選項。預設為關閉（統計會影響性能）。設置statistics="true"開啟統計
+		memoryStoreEvictionPolicy：快取對象清除策略。有三種：
+        	1.FIFO ，first in first out ，這個是大家最熟的，先進先出，不多講了
+        	2.LFU ， Less Frequently Used ，就是上面例子中使用的策略，直白一點就是講一直以來最少被使用的。
+				如上面所講，快取的元素有一個hit 屬性，hit 值最小的將會被清出快取
+        	3.LRU ，Least Recently Used ，最近最少使用的，快取的元素有一個時間戳，當快取容量滿了，而又需要騰出地方來快取新的元素的時候，
+				那麼現有快取元素中時間戳離當前時間最遠的元素將被清出快取
+		copyOnRead：當快取項被讀出時，是否返回一份它的拷貝（返回對像是快取中對象的拷貝）。預設false
+		copyOnWrite：當快取項被寫入時，是否寫入一份它的拷貝（寫入快取的是寫入對象的拷貝）。預設false
+		
+		通过使用<persistence/>子元素，可以配置缓存区的持久化策略。<persistence/>元素的主要属性如下：  
+		strategy：配置缓存区持久化的类型。可选值如下：  
+			localRestartable：仅在使用Ehcache企业版时有效。启用RestartStore，拷贝所有的缓存项（包含堆和非堆中的）到磁盘中，
+				此选项提供了缓存快速重启能力以及对磁盘上缓存的容错能力。 
+			localTempSwap：当缓存容量达到上限时，将缓存对象 （包含堆和非堆中的）交换到磁盘中。"localTempSwap" 并不持久化缓存内容。 
+			none：不持久化缓存内容。 
+			distributed：按照<terracotta>标签配置的持久化方式执行。非分布式部署时，此选项不可用。 
+			synchronousWrites：此属性仅在strategy="localRestartable"时有意义。默认false。设置为true，缓存写入方法在缓存项成功写入磁盘前不会返回
+	 -->
+	
+	<defaultCache
+		maxElementsInMemory="1000"
+		maxElementsOnDisk="100000"
+        eternal="false"
+        timeToIdleSeconds="3600"
+        timeToLiveSeconds="3600"
+        diskSpoolBufferSizeMB="10"
+        diskExpiryThreadIntervalSeconds="120"
+        memoryStoreEvictionPolicy="LRU"
+        overflowToDisk="true"
+        statistics="true" />
+
+    <cache name="org.hibernate.cache.internal.StandardQueryCache"
+    	maxElementsInMemory="100"
+		maxElementsOnDisk="1000"
+		eternal="false"
+		diskSpoolBufferSizeMB="10"
+		timeToIdleSeconds="120"
+		timeToLiveSeconds="120"
+		memoryStoreEvictionPolicy="LFU" />
+		
+	<cache name="org.hibernate.cache.spi.UpdateTimestampsCache"
+    	maxElementsInMemory="100"
+		maxElementsOnDisk="1000"
+		eternal="false"
+		diskSpoolBufferSizeMB="10"
+		timeToIdleSeconds="120"
+		timeToLiveSeconds="120"
+		memoryStoreEvictionPolicy="LFU" />
+		
+	<cache name="employee"
+    	maxElementsInMemory="100"
+		maxElementsOnDisk="1000"
+		eternal="false"
+		diskSpoolBufferSizeMB="10"
+		timeToIdleSeconds="120"
+		timeToLiveSeconds="120"
+		memoryStoreEvictionPolicy="LFU" />
+		
+	<cache name="imageCache"
+    	maxBytesLocalHeap="100M"
+    	maxBytesLocalDisk="5G"
+		eternal="true"
+		diskSpoolBufferSizeMB="10"
+		overflowToDisk="true"
+		diskPersistent="true"
+		memoryStoreEvictionPolicy="LFU" />
+</ehcache>

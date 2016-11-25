@@ -1,0 +1,6 @@
+Manifest-Version: 1.0
+provider: nail
+Implementation-Title: maplebox-core
+Implementation-Version: 1.0.0
+Implementation-Timestamp: Thu Jul 21 14:44:19 CST 2016
+
