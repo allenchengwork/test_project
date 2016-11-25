@@ -48,7 +48,7 @@ import com.maplebox.nail.jackson.StringTrimModule;
 	"com.maplebox.nail.interceptor",
 	"com.maplebox.nail.listener"})
 @PropertySource(
-	value = {"classpath:config/web-config-${web.mode:test}.xml"},
+	value = {"classpath:config/web-config-${web.mode:dev}${web.developer:}.xml"},
 	ignoreResourceNotFound = false
 )
 public class WebMvcConfig extends WebMvcConfigurerAdapter {

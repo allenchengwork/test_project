@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">  
+         <!-- 数据库基本信息配置 -->
+         <property name="url" value="${ds.url}" />
+         <property name="username" value="${ds.username}" />
+         <property name="password" value="${ds.password}" />
+         <property name="driverClassName" value="${ds.driverClassName}" />
+   		 <!-- 最大并发连接数 -->
+         <property name="maxTotal" value="20" />
+         <!-- 初始化连接数量 -->
+         <property name="initialSize" value="1" />
+         <!-- 配置获取连接等待超时的时间 -->
+         <property name="maxWaitMillis" value="60000" />
+         <!-- 最小空闲连接数 -->
+         <property name="minIdle" value="10" />  
+         <!-- 最大空闲连接数 -->
+         <property name="maxIdle" value="15" />  
+   		 <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+         <property name="timeBetweenEvictionRunsMillis" value="60000" />
+         <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+         <property name="minEvictableIdleTimeMillis" value="300000" />  
+         <property name="validationQuery" value="SELECT 1" />  
+         <property name="testWhileIdle" value="true" />  
+         <property name="testOnBorrow" value="false" />  
+         <property name="testOnReturn" value="false" />
+         <property name="poolPreparedStatements" value="true" />
+         <property name="maxOpenPreparedStatements" value="20" />
+         <!-- 1800秒，也就是30分钟 -->
+         <property name="removeAbandonedTimeout" value="1800" />
+         <!-- 关闭abanded连接时输出错误日志 -->   
+         <property name="logAbandoned" value="false" />
+	</bean>
+</beans>

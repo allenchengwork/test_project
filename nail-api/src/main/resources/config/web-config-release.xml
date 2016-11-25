@@ -6,13 +6,16 @@
 	<entry key="myvalue">Hello Release！！！</entry>
 	<entry key="myvalue2">測試中不用錢！！！</entry>
 	
-	<entry key="db.url"><![CDATA[jdbc:mysql://127.0.0.1:3306/buyer_db?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&zeroDateTimeBehavior=convertToNull&useSSL=false]]></entry>
-	<entry key="db.dbname">buyer_db</entry>
-	<entry key="db.username">root</entry>
-	<entry key="db.password">123asd</entry>
-	<entry key="db.showSql">false</entry>
-	
 	<entry key="secret.key">XGM7LVhTDEbZ9CyUBLKc2w==</entry>
 	
 	<entry key="img.path">${catalina.home}/image</entry>
+	
+	<!-- DataSource設定 -->
+	<entry key="ds.url"><![CDATA[jdbc:mysql://127.0.0.1:3306/arEC?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull]]></entry>
+	<entry key="ds.driverClassName">com.mysql.jdbc.Driver</entry>
+	<entry key="ds.username">root</entry>
+	<entry key="ds.password">123456</entry>
+	
+	<entry key="db.dbname">arEC</entry>
+	<entry key="db.showSql">true</entry>
 </properties>

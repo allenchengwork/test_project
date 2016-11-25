@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+	
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"  destroy-method="close">
+		<!-- 無需指定，除非系統無法自動識別 -->
+		<property name="driverClassName" value="${ds.driverClassName}" />
+		
+		<property name="jdbcUrl" value="${ds.url}" />
+		<property name="username" value="${ds.username}" />
+		<property name="password" value="${ds.password}" />
+		
+		<!-- 連接只讀數據庫時配置為true， 保證安全 -->
+		<property name="readOnly" value="false" />
+		
+		<!-- 等待連接池分配連接的最大時長（毫秒），超過這個時長還沒可用的連接則發生SQLException， 缺省:30秒 -->
+		<property name="connectionTimeout" value="30000" />
+		
+		<!-- 一個連接idle狀態的最大時長（毫秒），超時則被釋放（retired），缺省:10分鐘 -->
+		<property name="idleTimeout" value="600000" />
+		
+		<!-- 一個連接的生命時長（毫秒），超時而且沒被使用則被釋放（retired），缺省:30分鐘，建議設置比數據庫超時時長少30秒，參考MySQL wait_timeout參數（show variables like '%timeout%' ;） -->
+		<property name="maxLifetime" value="1800000" />
+		
+		<!-- 連接池中允許的最大連接數。缺省值：10；推薦的公式：((core_count * 2) + effective_spindle_count) -->
+		<property name="maximumPoolSize" value="15" />
+	</bean>
+</beans>

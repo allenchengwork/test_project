@@ -1,4 +1,4 @@
 Web
--Dweb.mode="test" -Dweb.name="NailAPI" -Dapp.log.level="DEBUG" -Dconsole.log.level="DEBUG" -Dehcache.disk.store.dir="C:\Program Files\Apache Software Foundation\Tomcat 8.0\temp\NailAPI"
+-Dweb.mode="dev" -Dweb.developer="-allen" -Dweb.name="NailAPI" -Dapp.log.level="DEBUG" -Dconsole.log.level="DEBUG" -Dehcache.disk.store.dir="D:\Tomcat\apache-tomcat-8.0.38\temp\NailAPI"
 Main
 -Dcatalina.home="D:\JavaAPI" -Dweb.mode="test" -Dweb.name="NailAPI" -Dapp.log.level="DEBUG" -Dconsole.log.level="DEBUG" -Dehcache.disk.store.dir="D:\JavaAPI\temp"
