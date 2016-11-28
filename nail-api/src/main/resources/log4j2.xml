@@ -2,9 +2,9 @@
 <!DOCTYPE configuration>
 <Configuration monitorInterval="60" status="DEBUG">
 	<Properties>
-		<Property name="web.name">${sys:web.name}</Property>
-		<Property name="web.package">com.maplebox.nail</Property>
-		<Property name="log.dir">${sys:catalina.home}/logs/${web.name}</Property>
+		<Property name="api.name">${sys:api.name}</Property>
+		<Property name="web.package">com.maplebox</Property>
+		<Property name="log.dir">${sys:catalina.home}/logs/${api.name}</Property>
 		<Property name="pattern">%d{yyyy/MM/dd HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</Property>
 		<Property name="file.pattern">%d{yyyy-MM-dd}-%i</Property>
 		<Property name="app.log.level">${sys:app.log.level}</Property>

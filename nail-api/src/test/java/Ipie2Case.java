@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 
@@ -16,7 +15,6 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.select.Elements;
 import org.springframework.core.io.ClassPathResource;
-import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import com.fasterxml.jackson.core.JsonParseException;
@@ -24,9 +22,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.ObjectWriter;
 import com.google.common.base.Charsets;
-import com.hyweb.posapi_npg.auth_in_mac_24;
 
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -110,11 +106,6 @@ public class Ipie2Case {
 		String txType = "0";
 		String Option = "1";
 		String Key = "U9uUPx6pKCHXK4TD6PRGVF92";
-		
-		auth_in_mac_24 auth = new auth_in_mac_24(MerchantID, TerminalID, lidm, purchAmt, txType, Option, Key);
-		
-		System.out.println(auth.getErrCode());
-		System.out.println(auth.getMAC());
 	}
 	
 	@Test

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
 	<comment>Nail-API</comment>
@@ -11,11 +11,11 @@
 	<entry key="img.path">${catalina.home}/image</entry>
 	
 	<!-- DataSource設定 -->
-	<entry key="ds.url"><![CDATA[jdbc:mysql://127.0.0.1:3306/arEC?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull]]></entry>
-	<entry key="ds.driverClassName">com.mysql.jdbc.Driver</entry>
-	<entry key="ds.username">root</entry>
-	<entry key="ds.password">123456</entry>
-	
+	<entry key="db.url"><![CDATA[jdbc:mysql://127.0.0.1:3306/arEC?useUnicode=true&characterEncoding=utf8&characterSetResults=utf8&useSSL=false&zeroDateTimeBehavior=convertToNull]]></entry>
+	<entry key="db.driverClassName">com.mysql.jdbc.Driver</entry>
+	<entry key="db.username">root</entry>
+	<entry key="db.password">123456</entry>
 	<entry key="db.dbname">arEC</entry>
 	<entry key="db.showSql">true</entry>
+	<entry key="db.hbm2ddl">none</entry>
 </properties>
