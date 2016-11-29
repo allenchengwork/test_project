@@ -5,11 +5,11 @@ import java.io.InputStream;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
-import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,7 +18,6 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.context.support.ReloadableResourceBundleMessageSource;
 import org.springframework.core.io.ClassPathResource;
-import org.springframework.http.CacheControl;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -31,8 +30,6 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.resource.GzipResourceResolver;
-import org.springframework.web.servlet.resource.PathResourceResolver;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 import com.google.code.kaptcha.Producer;
@@ -52,6 +49,9 @@ import com.google.common.base.Charsets;
 )
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	static Logger log = LoggerFactory.getLogger(WebMvcConfig.class);
+	
+	@Value("${app.version}")
+	private String appVersion;
 	
 	@Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
@@ -138,17 +138,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
-        registry.addResourceHandler("/**").addResourceLocations("/WEB-INF/resources/")
-	        .setCacheControl(CacheControl.maxAge(30, TimeUnit.DAYS))
+        registry.addResourceHandler("/node_modules/**").addResourceLocations("/WEB-INF/node_modules/");
+        registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
+        registry.addResourceHandler("/app_v"+appVersion+"/**").addResourceLocations("/WEB-INF/app/");
+/*	        .setCacheControl(CacheControl.maxAge(30, TimeUnit.DAYS))
 	        .resourceChain(true)
 	        .addResolver(new GzipResourceResolver())
-	        .addResolver(new PathResourceResolver());
-        /*
-	        .setCachePeriod(2592000)
-	        .setCacheControl(CacheControl.maxAge(30, TimeUnit.DAYS))
-	        .resourceChain(true)
-	        .addResolver(new GzipResourceResolver())
-	        .addResolver(new PathResourceResolver());
-	   */
+	        .addResolver(new PathResourceResolver());*/
     }
 }

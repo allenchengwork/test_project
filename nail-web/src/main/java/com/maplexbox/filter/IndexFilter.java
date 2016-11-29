@@ -27,7 +27,6 @@ public class IndexFilter implements Filter {
 				request.getRequestDispatcher("/index").forward(request, response);
 				return;
 			}
-			System.out.println("continue = "+httpRequest.getRequestURI());
 		}
 		
 		chain.doFilter(request, response);
@@ -43,7 +42,7 @@ public class IndexFilter implements Filter {
 		String uri = request.getRequestURI();
 		System.out.println("uri = "+uri);
 		String[] exclude = new String[] {
-			"/app/", "/app_", "/css/", "/images/", "/js/", "/node_modules/"	
+			"/app/", "/app_", "/resources/", "/node_modules/"	
 		};
 		
 		for (String ex : exclude) {

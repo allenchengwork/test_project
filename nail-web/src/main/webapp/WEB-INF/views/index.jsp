@@ -6,7 +6,7 @@
     <title>Angular QuickStart</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="resources/css/styles.css">
     <!-- 1. Load libraries -->
      <!-- Polyfill for older browsers -->
     <script src="node_modules/core-js/client/shim.min.js"></script>
