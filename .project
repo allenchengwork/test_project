@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <projectDescription>
-	<name>NailProject</name>
+	<name>MapleboxProject</name>
 	<comment></comment>
 	<projects>
 	</projects>
@@ -17,7 +17,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1480305375090</id>
+			<id>1480488578924</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -29,11 +29,11 @@
 					</matcher>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
-						<arguments>1.0-projectRelativePath-equals-true-false-maplebox-core</arguments>
+						<arguments>1.0-projectRelativePath-equals-true-false-nail-admin</arguments>
 					</matcher>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
-						<arguments>1.0-projectRelativePath-equals-true-false-nail-web</arguments>
+						<arguments>1.0-projectRelativePath-equals-true-false-maplebox-core</arguments>
 					</matcher>
 				</arguments>
 			</matcher>

@@ -1,0 +1,75 @@
+apply plugin: 'war'
+
+ext {
+	webAppMode = 'dev'
+	webDeveloper = '@allen'
+	webAppName = 'nail-admin'
+	webAppVersion = '00001'
+	
+	springVersion = '4.3.1.RELEASE'
+	jacksonVersion = '2.8.0'
+	log4jVersion = '2.6.2'
+	aspectjVersion = '1.8.9'
+	javaMailVersion = '1.5.5'
+	imageIOVersion = '3.2.1'
+}
+
+webAppDirName = 'src/main/webapp'
+
+dependencies {
+	runtime group: 'javax.servlet', name: 'jstl', version: '1.2' // 運行時
+	
+	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+	
+	compile group: 'org.springframework', name: 'spring-webmvc', version: "$springVersion"
+	compile group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
+	compile group: 'org.springframework', name: 'spring-aspects', version: "$springVersion"
+	
+	compile group: 'org.aspectj', name: 'aspectjweaver', version: "$aspectjVersion"
+	compile group: 'org.aspectj', name: 'aspectjrt', version: "$aspectjVersion"
+	
+	compile group: 'org.freemarker', name: 'freemarker', version: '2.3.23'
+	
+	compile group: 'javax.mail', name: 'javax.mail-api', version: "$javaMailVersion"
+	
+	compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
+	
+	compile group: 'jmimemagic', name: 'jmimemagic', version: '0.1.2'
+	
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-core', version: "$imageIOVersion"
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-jpeg', version: "$imageIOVersion"
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-metadata', version: "$imageIOVersion"
+	
+	compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.4.1'
+	
+	compile group: 'org.jsoup', name: 'jsoup', version: '1.9.2'
+	
+	compile group: 'org.apache.poi', name: 'poi', version: '3.15'
+	compile group: 'org.apache.poi', name: 'poi-ooxml', version: '3.15'
+	compile group: 'xerces', name: 'xercesImpl', version: '2.11.0'
+	
+	compile group: 'com.github.penggle', name: 'kaptcha', version: '2.3.2'
+	
+	compile project(':maplebox-core')
+}
+
+war {
+    doFirst {
+    	println 'export war start'
+        manifest {
+            attributes("Implementation-Title": project.name, "Implementation-Version": version, "Implementation-Timestamp": new Date())
+        }
+    }
+    rootSpec.eachFile {file ->
+    	if (file.name.startsWith("web-config-") && file.name.endsWith(".xml")) {
+    		if (file.name != "web-config-${webAppMode}${webDeveloper}.xml") {
+    			file.exclude()
+    		}
+    	}
+    }
+    destinationDir file("export/${webAppMode}")
+    archiveName "${webAppName}##${webAppVersion}.war"
+    doLast {
+    	println 'export war end'
+    }
+}

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="less" name="lessToCss">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties">
+		<classpath>
+			<pathelement location="src\main\webapp\WEB-INF\lib\ant-contrib-0.6.jar" />
+		</classpath>
+	</taskdef>
+	<loadproperties srcFile="less.properties" />
+    <property name="dir.project" value="." />
+    <property name="dir.less" value="${dir.project}/src/main/webapp/WEB-INF/resources/less" />
+    <property name="dir.css" value="${dir.project}/src/main/webapp/WEB-INF/resources/css" />
+    
+    <target name="less" description="Compile LESS files">
+        <foreach target="lessfile" param="filename">
+        	<path>
+				<fileset dir="${dir.less}" casesensitive="yes">
+					<include name="**/*.less" />
+				</fileset>
+			</path>
+		</foreach>
+    </target>
+    
+    <target name="lessfile">
+    	<basename property="less.filename" file="${filename}" suffix=".less" />
+    	<exec executable="${lessc}" failonerror="true">
+            <arg line="${dir.less}/${less.filename}.less ${dir.css}/${less.filename}.css" />
+        </exec>
+        <exec executable="${lessc}" failonerror="true">
+            <arg line="--clean-css ${dir.less}/${less.filename}.less ${dir.css}/${less.filename}.min.css" />
+        </exec>
+    </target>
+</project>
