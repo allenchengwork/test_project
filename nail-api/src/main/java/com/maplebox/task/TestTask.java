@@ -21,12 +21,12 @@ public class TestTask {
 	
 	private ScheduledFuture<?> scheduledFuture;
 	
-	@Scheduled(cron = "0 0/1 * * * MON-FRI")
+	//@Scheduled(cron = "0 0/1 * * * MON-FRI")
 	public void doSomething() throws Exception {
 		log.debug("doSomething");
 	}
 	
-	@Scheduled(fixedRateString = "${task.rate}")
+	//@Scheduled(fixedRateString = "${task.rate}")
 	public void doTest() {
 		log.debug("doTest");
 	}
@@ -45,7 +45,7 @@ public class TestTask {
 					number = index;
 					index++;
 				}
-				log.debug("*****taskSchedule*****>>>"+number+"<<<"+count);
+				//log.debug("*****taskSchedule*****>>>"+number+"<<<"+count);
 				count++;
 			}
 		}, new CronTrigger(cron));

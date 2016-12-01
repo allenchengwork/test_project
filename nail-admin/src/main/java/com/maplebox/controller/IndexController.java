@@ -16,6 +16,9 @@ public class IndexController {
 	@Value("${app.version}")
 	private String appVersion;
 	
+	@Value("${app.mode}")
+	private String appMode;
+	
 	@Value("${app.root}")
 	private String appRoot;
 	
@@ -35,5 +38,14 @@ public class IndexController {
 		
 		model.addAttribute("appVersion", appVersion);
 		return "systemjs.config";
+	}
+	
+	@GetMapping(path = "app/app.settings.js")
+	public String appSettingsJs(Model model) {
+		log.debug("app.settings.js");
+		
+		model.addAttribute("appVersion", appVersion);
+		model.addAttribute("appMode", appMode);
+		return "app/app.settings";
 	}
 }

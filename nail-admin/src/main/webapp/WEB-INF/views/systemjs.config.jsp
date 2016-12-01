@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="application/javascript; charset=UTF-8"
     pageEncoding="UTF-8"%>
+"use strict";
 /**
  * System configuration for Angular samples
  * Adjust as necessary for your application needs.
@@ -13,7 +14,7 @@
     // map tells the System loader where to look for things
     map: {
       // our app is within the app folder
-      app: 'app_v${appVersion}',
+      app: 'app/v${appVersion}/',
       // angular bundles
       '@angular/core': 'npm:@angular/core/bundles/core.umd.js',
       '@angular/common': 'npm:@angular/common/bundles/common.umd.js',

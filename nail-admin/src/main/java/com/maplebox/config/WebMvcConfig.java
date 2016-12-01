@@ -53,6 +53,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Value("${app.version}")
 	private String appVersion;
 	
+	@Value("${node_modules.path}")
+	private String nodeModulesPath;
+	
+	@Value("${plugins.path}")
+	private String pluginsPath;
+	
 	@Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
 		return new PropertySourcesPlaceholderConfigurer();
@@ -143,9 +149,12 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
-        registry.addResourceHandler("/node_modules/**").addResourceLocations("/WEB-INF/node_modules/");
+        log.debug("node_modules.path = {}", nodeModulesPath);
+        log.debug("plugins.path = {}", nodeModulesPath);
+        registry.addResourceHandler("/plugins/**").addResourceLocations(pluginsPath);
+        registry.addResourceHandler("/node_modules/**").addResourceLocations(nodeModulesPath);
         registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
-        registry.addResourceHandler("/app_v"+appVersion+"/**").addResourceLocations("/WEB-INF/app/");
+        registry.addResourceHandler("/app/**").addResourceLocations("/WEB-INF/app/");
 /*	        .setCacheControl(CacheControl.maxAge(30, TimeUnit.DAYS))
 	        .resourceChain(true)
 	        .addResolver(new GzipResourceResolver())

@@ -35,6 +35,6 @@ subprojects {
     }
 
     jar {
-        manifest.attributes provider: 'nail'
+        manifest.attributes provider: 'maplebox'
     }
 }

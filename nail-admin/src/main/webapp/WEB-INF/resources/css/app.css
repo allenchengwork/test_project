@@ -1,8 +1,4 @@
-.app {
-  color: #0f0f0f;
-  background-color: #cccbbb;
-}
-.hello {
-  color: #0f0f0f;
-  background-color: #cccbbb;
+.skin-blue .sidebar-menu > li.header {
+  color: #fff;
+  font-size: 1.5rem;
 }

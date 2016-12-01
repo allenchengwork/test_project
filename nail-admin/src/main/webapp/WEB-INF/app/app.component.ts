@@ -1,6 +1,11 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 @Component({
-  selector: 'my-app',
-  template: '<h1>Hello AngularTest!</h1>'
+    moduleId: module.id,
+    selector: 'web-app',
+    templateUrl: './app.component.html'
 })
-export class AppComponent { }
+export class AppComponent {
+    constructor() {
+        
+    }
+}
