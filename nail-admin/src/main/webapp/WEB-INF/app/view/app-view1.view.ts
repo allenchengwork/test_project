@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -8,11 +8,11 @@ import { Location } from '@angular/common';
     templateUrl: './app-view1.view.html',
     styleUrls: ['./app-view1.view.css']
 })
-export class AppView1 implements OnInit, OnDestroy {
+export class AppView1 {
     constructor() {
     }
 
-    ngOnInit(): void {
+    ngOnInit() {
         
     }
 

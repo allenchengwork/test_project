@@ -1,2 +1,9 @@
 eclipse.preferences.version=1
+embeddedTypeScriptId=TypeScript (2.0.6)
+installedTypeScriptPath=D\:\\NodeJS\\node_modules\\typescript
+nodeJSEmbedded=node-v4.2.4-win32-x86_64
+nodeJSPath=C\:\\Program Files\\nodejs\\node.exe
+tsserverTraceOnConsole=false
 typeScriptBuildPath={"tsconfig.json"\:{}}
+useEmbeddedTypeScript=false
+useNodeJSEmbedded=false

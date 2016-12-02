@@ -1,5 +1,5 @@
 build.path.exportedFolder=
-build.path.sourceFolder=src/main/webapp/WEB-INF/resources/app_v1.0.0
+build.path.sourceFolder=src/main/webapp/WEB-INF/app
 compiler.outputDirOption=
 compiler.outputFileOption=
 eclipse.preferences.version=1

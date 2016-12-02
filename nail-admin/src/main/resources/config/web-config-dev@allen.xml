@@ -3,7 +3,7 @@
 <properties>
 	<comment>Nail-Admin</comment>
 	
-	<entry key="app.version">1.0.21</entry>
+	<entry key="app.version">1.0.23</entry>
 	<entry key="app.mode">dev</entry>
 	<entry key="app.root">/admin/</entry>
 	

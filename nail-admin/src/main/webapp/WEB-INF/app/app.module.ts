@@ -1,18 +1,27 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { AppComponent }   from './app.component';
-import { AppSettings } from './app.settings';
+
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+
 import { AppRoutingModule } from './module/app-routing.module';
 
-import { AppView1 }   from './view/app-view1.view';
-import { AppView2 }   from './view/app-view2.view';
+import { ViewModule } from './module/view.module';
+import { PluginModule } from './module/plugin.module';
+
+import { AppSettings } from './app.settings';
+
+import { AppComponent }   from './app.component';
 
 @NgModule({
     imports: [
-        BrowserModule, AppRoutingModule
+        BrowserModule, 
+        AppRoutingModule, 
+        NgbModule.forRoot(), 
+        PluginModule,
+        ViewModule
     ],
     declarations: [
-        AppComponent, AppView1, AppView2
+        AppComponent
     ],
     providers: [
        {provide: 'APP_MODE', useValue: AppSettings.APP_MODE},
