@@ -29,21 +29,19 @@ import com.maplebox.domain.ValidError;
 public class ControllerHandler {
 	static Logger log = LoggerFactory.getLogger(ControllerHandler.class);
 	
-	private Locale defaultLocale = Locale.TAIWAN;
-	
 	@Autowired
 	private MessageSource messageSource;
 	
 	@ExceptionHandler(MethodArgumentNotValidException.class)
 	@ResponseStatus(HttpStatus.OK)
-	public DataResult<ValidError> handleValidException(HttpServletRequest request, MethodArgumentNotValidException e) {
+	public DataResult<ValidError> handleValidException(HttpServletRequest request, MethodArgumentNotValidException e, Locale locale) {
 		log.error("handleValidException");
 		ValidError validError = new ValidError();
 		
 		List<String> globalMessage = new ArrayList<>();
 		List<ObjectError> globalErrors = e.getBindingResult().getGlobalErrors();
 		for (ObjectError error : globalErrors) {
-			globalMessage.add(messageSource.getMessage(error, defaultLocale));
+			globalMessage.add(messageSource.getMessage(error, locale));
 		}
 		if (globalMessage.size() > 0) {
 			validError.setGlobalError(globalMessage);
@@ -61,7 +59,7 @@ public class ControllerHandler {
 			}
 			String errorCode = error.getCode();
 			errorCode = errorCode.substring(errorCode.lastIndexOf('.')+1);
-			fieldErrorMap.put(errorCode, messageSource.getMessage(error, defaultLocale));
+			fieldErrorMap.put(errorCode, messageSource.getMessage(error, locale));
 		}
 		validError.setFieldError(fieldMap);
 		return new DataResult<ValidError>(false, ResultCode.BASE_VALID_ERROR, validError);
@@ -69,19 +67,16 @@ public class ControllerHandler {
 	
 	@ExceptionHandler(NoHandlerFoundException.class)
 	@ResponseStatus(HttpStatus.NOT_FOUND)
-    public DataResult<String> handleError404(HttpServletRequest request, Exception e)   {
+    public DataResult<String> handleError404(HttpServletRequest request, Exception e, Locale locale)   {
 		log.error("handleError404", e);
-		return new DataResult<String>(false, ResultCode.NOT_FOUND_PAGE, "頁面不存在");
+		String notFoundPage = messageSource.getMessage("not_found_page", null, locale);
+		return new DataResult<String>(false, ResultCode.NOT_FOUND_PAGE, notFoundPage);
 	}
 	
 	@ExceptionHandler(Throwable.class)
 	@ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
-	public DataResult<String> handleAllThrowable(HttpServletRequest request, Throwable e) {
+	public DataResult<String> handleAllThrowable(HttpServletRequest request, Throwable e, Locale locale) {
 		log.error("handleAllThrowable", e);
 		return new DataResult<String>(false, ResultCode.SERVER_ERROR, e.getMessage());
-	}
-	
-	public static void main(String[] args) {
-		
 	}
 }

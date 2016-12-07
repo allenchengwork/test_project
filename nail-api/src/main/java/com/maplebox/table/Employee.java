@@ -12,7 +12,7 @@ import javax.persistence.Table;
 import com.google.common.base.MoreObjects;
 
 @Entity
-@Table(name = "employee")
+@Table
 public class Employee implements Serializable {
 	/**
 	 * 
@@ -21,10 +21,9 @@ public class Employee implements Serializable {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id")
 	private Integer id;
 	
-	@Column(name = "name", length = 10)
+	@Column(length = 10)
 	private String name;
 	
 	public Integer getId() {

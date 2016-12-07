@@ -53,11 +53,11 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Value("${app.version}")
 	private String appVersion;
 	
-	@Value("${node_modules.path}")
-	private String nodeModulesPath;
+	@Value("${app.mode}")
+	private String appMode;
 	
-	@Value("${plugins.path}")
-	private String pluginsPath;
+	@Value("${app.path}")
+	private String appPath;
 	
 	@Bean
     public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
@@ -107,9 +107,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	
 	@Bean
 	public MultipartResolver multipartResolver() {
-		//StandardServletMultipartResolver multipartResolver = new StandardServletMultipartResolver();
-		//return multipartResolver;
-		
 		CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
 		multipartResolver.setDefaultEncoding("UTF-8");
 		multipartResolver.setMaxInMemorySize(10240);
@@ -135,11 +132,6 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 		return prop;
 	}
 	
-	/*@Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(indexInterceptor).addPathPatterns("/**");
-    }*/
-	
 	@Override
     public void configureDefaultServletHandling(
             DefaultServletHandlerConfigurer configurer) {
@@ -149,15 +141,7 @@ public class WebMvcConfig extends WebMvcConfigurerAdapter {
 	@Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         super.addResourceHandlers(registry);
-        log.debug("node_modules.path = {}", nodeModulesPath);
-        log.debug("plugins.path = {}", nodeModulesPath);
-        registry.addResourceHandler("/plugins/**").addResourceLocations(pluginsPath);
-        registry.addResourceHandler("/node_modules/**").addResourceLocations(nodeModulesPath);
-        registry.addResourceHandler("/resources/**").addResourceLocations("/WEB-INF/resources/");
-        registry.addResourceHandler("/app/**").addResourceLocations("/WEB-INF/app/");
-/*	        .setCacheControl(CacheControl.maxAge(30, TimeUnit.DAYS))
-	        .resourceChain(true)
-	        .addResolver(new GzipResourceResolver())
-	        .addResolver(new PathResourceResolver());*/
+        log.debug("app.path = {}", appPath);
+        registry.addResourceHandler("/**").addResourceLocations(appPath);
     }
 }

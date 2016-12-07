@@ -14,7 +14,7 @@ import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.google.common.base.Charsets;
-import com.maplebox.filter.IndexFilter;
+import com.maplebox.filter.AppFilter;
 
 public class AppInitializer implements WebApplicationInitializer {
 
@@ -43,7 +43,7 @@ public class AppInitializer implements WebApplicationInitializer {
         filterRegistration = servletContext.addFilter("shallowEtagHeaderFilter", shallowEtagHeaderFilter);
         filterRegistration.addMappingForServletNames(null, true, "dispatcherServlet");
         
-        IndexFilter indexFilter = new IndexFilter();
+        AppFilter indexFilter = new AppFilter();
         filterRegistration = servletContext.addFilter("indexFilter", indexFilter);
         filterRegistration.addMappingForServletNames(null, true, "dispatcherServlet");
     }

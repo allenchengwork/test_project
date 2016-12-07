@@ -1,0 +1,78 @@
+<div class="wrapper">
+	<header class="main-header">
+		<!-- Logo -->
+		<a href="index2.html" class="logo">
+			<!-- mini logo for sidebar mini 50x50 pixels -->
+			<span class="logo-mini">後</span>
+			<!-- logo for regular state and mobile devices -->
+			<span class="logo-lg">
+				<b>後台</b>
+				網站
+			</span>
+		</a>
+		<!-- Header Navbar: style can be found in header.less -->
+		<nav class="navbar navbar-static-top">
+			<!-- Sidebar toggle button-->
+			<a (click)="clickSidebar($event)" href="#" class="sidebar-toggle" data-toggle="offcanvas"
+				role="button">
+				<span class="sr-only">Toggle navigation</span>
+			</a>
+			<navbar-menu></navbar-menu>
+		</nav>
+	</header>
+
+	<!-- Left side column. contains the logo and sidebar -->
+	<aside class="main-sidebar">
+		<!-- sidebar: style can be found in sidebar.less -->
+		<section class="sidebar">
+			<!-- /.search form -->
+			<sidebar-menu [menuList]="menuList"></sidebar-menu>
+		</section>
+		<!-- /.sidebar -->
+	</aside>
+
+	<!-- Content Wrapper. Contains page content -->
+	<div class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		<section class="content-header">
+			<h1>
+				{{title}}
+				<small>{{smallTitle}}</small>
+			</h1>
+			<ol class="breadcrumb">
+				<li>
+					<a routerLink="/">
+						<i class="fa fa-dashboard"></i>
+						Home
+					</a>
+				</li>
+				<li *ngFor="let item of breadcrumb" 
+				    [ngClass]="{'active': item.active}">{{item.name}}</li>
+			</ol>
+		</section>
+		<!-- Main content -->
+		<section class="content">
+			<router-outlet></router-outlet>
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+	<footer class="main-footer">
+		<div class="pull-right hidden-xs">
+			<b>Version</b>
+			{{appVersion}}
+		</div>
+		<strong>
+			Copyright &copy; 2016
+			<a href="#">Maplebox Studio</a>
+			.
+		</strong>
+		All rights reserved.
+	</footer>
+
+	<!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+	<div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->

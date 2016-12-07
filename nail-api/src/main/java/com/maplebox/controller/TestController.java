@@ -23,9 +23,7 @@ import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.ApplicationEventPublisher;
-import org.springframework.context.annotation.AnnotationConfigApplicationContext;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -46,8 +44,6 @@ import org.springframework.web.multipart.MultipartFile;
 import com.google.common.base.Charsets;
 import com.google.common.collect.Lists;
 import com.google.common.io.Files;
-import com.maplebox.config.TransactionConfig;
-import com.maplebox.core.TestUtil;
 import com.maplebox.event.SendEmailEvent;
 import com.maplebox.service.EmailService;
 import com.maplebox.service.EmployeeService;
@@ -63,9 +59,6 @@ import freemarker.template.Template;
 @RequestMapping(value = "/test")
 public class TestController {
 	static Logger log = LoggerFactory.getLogger(TestController.class);
-	
-	@Value("${myvalue}")
-	private String myValue;
 	
 	@Autowired
 	private EmployeeService employeeService;
@@ -88,12 +81,6 @@ public class TestController {
 	@InitBinder
 	protected void initBinder(WebDataBinder binder) {
 		binder.setValidator(employeeValidator);
-	}
-	
-	@GetMapping(path = "index")
-	public String index() {
-		TestUtil.test();
-		return myValue;
 	}
 	
 	@RequestMapping(value = "json", method = RequestMethod.GET)

@@ -1,5 +1,6 @@
 package com.maplebox.config;
 
+import java.io.IOException;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -11,27 +12,23 @@ import javax.sql.DataSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.context.annotation.AdviceMode;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;
 import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.PropertySource;
-import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.orm.jpa.JpaTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import com.maplebox.app.AppInitializer;
 import com.mysql.jdbc.AbandonedConnectionCleanupThread;
 
 @Configuration
 @ComponentScan(basePackages = {"com.maplebox.service"})
-@PropertySource(
-	value = {"classpath:config/web-config-${web.mode:dev}${web.developer:}.xml"},
-	ignoreResourceNotFound = false
-)
 @ImportResource(locations = {
 	"classpath:datasource/hikari-cp.xml",
 	"classpath:hibernate.xml"
@@ -47,8 +44,9 @@ public class TransactionConfig {
 	static Logger log = LoggerFactory.getLogger(TransactionConfig.class);
 	
 	@Bean
-    public static PropertySourcesPlaceholderConfigurer propertyConfigurer() {
-		return new PropertySourcesPlaceholderConfigurer();
+    public static PropertyPlaceholderConfigurer propertyConfigurer() throws IOException {
+		log.debug("TransactionConfig.propertyConfigurer");
+		return AppInitializer.propertyConfigurer();
     }
 
 	@Bean

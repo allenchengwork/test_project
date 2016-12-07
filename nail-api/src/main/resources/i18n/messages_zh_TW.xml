@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+	<comment>i18n default</comment>
+	
+	<entry key="not_found_page">找不到頁面</entry>
+	
+	<entry key="Employee.id.required">必需要有編號</entry>
+	
+	<entry key="Employee.name.NotEmpty">測試中不負責處理錯誤訊息</entry>
+	<entry key="Employee.name.Length">{0}長度不能超過{2}個字元</entry>
+
+	<entry key="test.employee.global">測試全域錯誤訊息</entry>
+</properties>

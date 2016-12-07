@@ -1,0 +1,125 @@
+.col-xs-15,
+.col-sm-15,
+.col-md-15,
+.col-lg-15 {
+    position: relative;
+    min-height: 1px;
+    padding-right: 10px;
+    padding-left: 10px;
+}
+
+.col-xs-15 {
+    width: 20%;
+    float: left;
+}
+
+.thumbnail {
+	background-color: #e8e8e8;
+	position: relative;
+}
+
+.thumbnail .action {
+	position: absolute;
+	top: 0px;
+	right: 0px;
+	padding: 2px 8px;
+    font-size: 25px;
+	background-color: #e8e8e8;
+	border-radius: 0px 0px 0px 5px;
+	cursor: pointer;
+	display: none;
+}
+
+.thumbnail:hover .action {
+	display: block;
+}
+
+.thumbnail img {
+	width: 100%;
+}
+
+.thumbnail .caption p {
+	margin: 0px;
+}
+
+.box-labelbox .box-body {
+	padding: 0px;
+	position: relative;
+}
+
+.box-labelbox .box-label {
+	width: 100%;
+	position: initial;
+	border-bottom: 1px solid #f4f4f4;
+    min-height: 100%;
+}
+.box-labelbox .box-label .label-title {
+	padding: 10px;
+	margin: 0px;
+	font-size: 15px;
+	border-bottom: 1px solid #f4f4f4;
+}
+.box-labelbox .box-label .label-body {
+	padding: 10px;
+}
+.box-labelbox .box-label .label-body .btn {
+	margin: 2px;
+	opacity: 0.3;
+}
+.box-labelbox .box-label .label-body .btn.active {
+	margin: 2px;
+	opacity: 1;
+}
+
+.box-labelbox .box-content {
+	margin-left: 0px;
+    padding: 20px;
+}
+
+@media (min-width: 768px) {
+    .col-sm-15 {
+        width: 20%;
+        float: left;
+    }
+    
+    .box-labelbox .box-label {
+		width: 100%;
+	    position: initial;
+	    border-bottom: 1px solid #f4f4f4;
+	}
+	.box-labelbox .box-content {
+		margin-left: 0px;
+	}
+}
+@media (min-width: 992px) {
+    .col-md-15 {
+        width: 20%;
+        float: left;
+    }
+    
+	.box-labelbox .box-label {
+		position: absolute;
+	    width: 210px;
+	    border-right: 1px solid #f4f4f4;
+	    border-bottom: none;
+	}
+	.box-labelbox .box-content {
+		margin-left: 210px;
+	}
+}
+@media (min-width: 1200px) {
+    .col-lg-15 {
+        width: 20%;
+        float: left;
+    }
+    
+	.box-labelbox .box-label {
+		position: absolute;
+	    width: 210px;
+	    border-right: 1px solid #f4f4f4;
+	    border-bottom: none;
+	}
+	.box-labelbox .box-content {
+		margin-left: 210px;
+	}
+}

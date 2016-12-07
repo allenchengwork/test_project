@@ -1,7 +1,9 @@
 package com.maplebox.app;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 import javax.servlet.FilterRegistration;
 import javax.servlet.FilterRegistration.Dynamic;
@@ -9,6 +11,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
@@ -18,15 +22,23 @@ import org.springframework.web.filter.ShallowEtagHeaderFilter;
 import org.springframework.web.servlet.DispatcherServlet;
 
 import com.google.common.base.Charsets;
+import com.maplebox.encrypt.EncryptPropertyPlaceholderConfigurer;
+import com.maplebox.util.PropertyUtil;
 
 import net.bull.javamelody.MonitoringFilter;
 import net.bull.javamelody.SessionListener;
 import net.sf.ehcache.constructs.web.ShutdownListener;
 
 public class AppInitializer implements WebApplicationInitializer {
+	private static final String KEY = "Maplebox123Key45";
+	private static final String IV = "RandomInitVector";
+	
+	private static EncryptPropertyPlaceholderConfigurer placeholderConfigurer;
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
+    	Properties webConfig = configProperties();
+    	
         WebApplicationContext context = getContext();
         servletContext.addListener(ShutdownListener.class);
         servletContext.addListener(new ContextLoaderListener(context));
@@ -60,10 +72,10 @@ public class AppInitializer implements WebApplicationInitializer {
         }
         filterRegistration.setAsyncSupported(true);
         Map<String, String> initParameters = new HashMap<>();
-        initParameters.put("disabled", "false");
+        initParameters.put("disabled", webConfig.getProperty("javamelody.disabled"));
         initParameters.put("quartz-default-listener-disabled", "true");
-        initParameters.put("authorized-users", "root:12345");
-        initParameters.put("monitoring-path", "/monitoring");
+        initParameters.put("authorized-users", webConfig.getProperty("javamelody.authorized-users"));
+        initParameters.put("monitoring-path", webConfig.getProperty("javamelody.monitoring-path"));
         initParameters.put("url-exclude-pattern", "(/images/.*|/js/.*|/styles/.*)");
         
         filterRegistration.setInitParameters(initParameters);
@@ -75,5 +87,34 @@ public class AppInitializer implements WebApplicationInitializer {
         context.setConfigLocation("com.maplebox.config");
         return context;
     }
+    
+    public static synchronized PropertyPlaceholderConfigurer propertyConfigurer() throws IOException {
+    	if (placeholderConfigurer == null) {
+	    	Properties prop = AppInitializer.configProperties();
+	    	String encryptPropNames = prop.getProperty("prop.encrypt", "");
+	    	
+			placeholderConfigurer = new EncryptPropertyPlaceholderConfigurer(KEY, IV);
+			placeholderConfigurer.setEncryptPropNames(encryptPropNames);
+			placeholderConfigurer.setLocation(new ClassPathResource(getXmlConfigPath()));
+    	}
+		
+		return placeholderConfigurer;
+    }
 
+    public static Properties configProperties() {
+    	String configPath = getXmlConfigPath();
+		Properties prop = null;
+		try {
+			prop = PropertyUtil.loadFromXMLByClassPath(configPath);
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		return prop;
+	}
+    
+    public static String getXmlConfigPath() {
+    	String mode = System.getProperty("web.mode", "dev");
+    	String developer = System.getProperty("web.developer", "");
+    	return "config/web-config-"+mode+developer+".xml";
+    }
 }

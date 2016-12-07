@@ -6,11 +6,6 @@
 	</projects>
 	<buildSpec>
 		<buildCommand>
-			<name>org.eclipse.xtext.ui.shared.xtextBuilder</name>
-			<arguments>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>org.eclipse.jdt.core.javabuilder</name>
 			<arguments>
 			</arguments>
@@ -26,40 +21,16 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.ui.externaltools.ExternalToolBuilder</name>
-			<triggers>auto,full,incremental,</triggers>
-			<arguments>
-				<dictionary>
-					<key>LaunchConfigHandle</key>
-					<value>&lt;project&gt;/.externalToolBuilders/Less_Auto_Builder.launch</value>
-				</dictionary>
-			</arguments>
-		</buildCommand>
-		<buildCommand>
 			<name>ts.eclipse.ide.core.typeScriptBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
 	</buildSpec>
 	<natures>
-		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
-		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
-		<nature>org.eclipse.xtext.ui.shared.xtextNature</nature>
-		<nature>net.vtst.ow.eclipse.less.nature</nature>
-		<nature>org.eclipse.jdt.core.javanature</nature>
 		<nature>org.springsource.ide.eclipse.gradle.core.nature</nature>
+		<nature>org.eclipse.jdt.core.javanature</nature>
+		<nature>org.eclipse.wst.common.project.facet.core.nature</nature>
 		<nature>org.eclipse.wst.common.modulecore.ModuleCoreNature</nature>
+		<nature>org.eclipse.jem.workbench.JavaEMFNature</nature>
 	</natures>
-	<linkedResources>
-		<link>
-			<name>std-lib</name>
-			<type>2</type>
-			<locationURI>virtual:/virtual</locationURI>
-		</link>
-		<link>
-			<name>std-lib/lib.d.ts</name>
-			<type>1</type>
-			<location>D:/eclipseForTest/plugins/com.axmor.eclipse.typescript.core_4.0.0.201508061529/lib/typescript-bridge/ts/lib.d.ts</location>
-		</link>
-	</linkedResources>
 </projectDescription>

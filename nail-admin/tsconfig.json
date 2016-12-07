@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es6",
+    "target": "es5",
     "module": "commonjs",
     "moduleResolution": "node",
     "sourceMap": true,
@@ -9,5 +9,5 @@
     "removeComments": false,
     "noImplicitAny": false
   },
-	"include": ["src/main/webapp/WEB-INF/app"]
+	"include": ["src/main/webapp/WEB-INF/app","src/main/webapp/WEB-INF/node_modules"]
 }
