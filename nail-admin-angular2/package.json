@@ -4,13 +4,14 @@
   "license": "MIT",
   "angular-cli": {},
   "scripts": {
-    "start": "ng serve",
+    "start-dev": "ng serve --target=development --environment=dev",
+    "start-prod": "ng serve --target=production --environment=prod",
     "lint": "tslint \"src/**/*.ts\"",
     "test": "ng test",
     "pree2e": "webdriver-manager update",
     "e2e": "protractor",
-    "dev": "ng build --target=development --environment=dev --base-href /admin/",
-    "prod": "ng build --target=production --environment=prod --base-href /admin/"
+    "build-dev": "ng build --target=development --environment=dev --base-href /admin/",
+    "build-prod": "ng build --target=production --environment=prod --base-href /admin/"
   },
   "private": true,
   "dependencies": {

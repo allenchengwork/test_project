@@ -42,8 +42,8 @@ public class AppFilter implements Filter {
 	private boolean checkForwardIndex(String path) {
 		String[] exclude = new String[] {
 			"/index", "/favicon.ico",
-			"/app/", "/assets/", 
-			"/inline.", "/main.", "/styles.", "/vendor."
+			"/app/", "/assets/", "/plugins/",
+			"/inline.", "/main.", "/scripts.", "/styles.", "/vendor."
 		};
 		
 		for (String ex : exclude) {

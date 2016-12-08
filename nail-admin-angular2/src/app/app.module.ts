@@ -1,7 +1,8 @@
 import { NgModule }      from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
-import { APP_BASE_HREF } from '@angular/common';
+import { CommonModule, APP_BASE_HREF } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 import { environment } from '../environments/environment';
 
@@ -30,6 +31,8 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
     imports: [
         BrowserModule,
         HttpModule,
+        CommonModule,
+        FormsModule,
         AppRoutingModule, 
         NgbModule.forRoot(), 
         PluginModule,
@@ -39,10 +42,11 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
         AppComponent
     ],
     providers: [
-       {provide: APP_BASE_HREF, useValue: environment.appRoot},
        {provide: 'APP_MODE', useValue: environment.appMode},
        {provide: 'APP_VERSION', useValue: environment.appVersion},
+       {provide: 'BASE_URL', useValue:environment.baseUrl},
        {provide: 'API_URL', useValue:environment.apiUrl},
+       {provide: APP_BASE_HREF, useValue: environment.baseUrl},
        Logger,
        {provide: LoggerOptions, useValue: {level: environment.logLevel}},
        ServerURLInterceptor,

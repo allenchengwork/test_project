@@ -9,7 +9,7 @@ export const environment = {
   production: false,
   appMode: 'dev',
   appVersion: '1.0.0',
-  appRoot: '/admin/',
-  apiUrl: 'http://127.0.0.1:8080/api/',
+  baseUrl: '/',
+  apiUrl: '/api/',
   logLevel: LoggerLevel.DEBUG
 };

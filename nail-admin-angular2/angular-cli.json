@@ -9,6 +9,11 @@
       "outDir": "dist",
       "assets": [
         "assets",
+        "plugins/bootstrap-3.3.7",
+        "plugins/font-awesome-4.7.0",
+        "plugins/ionicons-2.0.1",
+        "plugins/admin-lite",
+        "plugins/jQuery",
         "favicon.ico"
       ],
       "index": "index.html",
@@ -18,9 +23,11 @@
       "prefix": "app",
       "mobile": false,
       "styles": [
-        "styles.less"
+        "app.less"
       ],
-      "scripts": [],
+      "scripts": [
+      	"app.js"
+      ],
       "environments": {
         "source": "environments/environment.ts",
         "dev": "environments/environment.ts",

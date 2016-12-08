@@ -6,14 +6,14 @@ import { AppRoutingModule } from './app-routing.module';
 import { ImageManager } from '../view/image-manager.view';
 import { DataManager } from '../view/data-manager.view';
 
-let viewModules = [
+export const VIEW_MODULES = [
     ImageManager, DataManager
 ];
 
 @NgModule({
     imports: [BrowserModule, AppRoutingModule, NgbModule.forRoot()],
-    exports: viewModules,
-    declarations: viewModules
+    exports: VIEW_MODULES,
+    declarations: VIEW_MODULES
 })
 export class ViewModule {
     

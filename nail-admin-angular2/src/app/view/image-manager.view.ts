@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
@@ -14,7 +14,7 @@ export class ImageManager {
     private labelList:Label[] = [];
     private imageList:Photo[][] = [];
 
-    constructor() {
+    constructor(@Inject("BASE_URL") private baseUrl:string) {
     }
 
     ngOnInit() {
@@ -27,20 +27,21 @@ export class ImageManager {
             {text: '分類六'},
             {text: '分類七'}
         ];
+        let imagePath = this.baseUrl+'assets/photos/';
         this.imageList = [
             [
-                 {url:'/admin/assets/resources/photos/lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:'/admin/assets/resources/photos/fjords.jpg', title:'Fjords', desc:'Lorem ipsum...'},
-                 {url:'/admin/assets/resources/photos/nature.jpg', title:'Nature', desc:'這是說明文字...'},
-                 {url:'/admin/assets/resources/photos/unnamed.png', title:'Unnamed', desc:'Lorem ipsum...'},
-                 {url:'/admin/assets/resources/photos/lights.jpg', title:'Lights', desc:'Lorem ipsum...'}
+                 {url:imagePath+'lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'fjords.jpg', title:'Fjords', desc:'Lorem ipsum...'},
+                 {url:imagePath+'nature.jpg', title:'Nature', desc:'這是說明文字...'},
+                 {url:imagePath+'unnamed.png', title:'Unnamed', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', title:'Lights', desc:'Lorem ipsum...'}
             ],
             [
-                 {url:'/admin/assets/resources/photos/lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:'/admin/assets/resources/photos/lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:'/admin/assets/resources/photos/lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:'/admin/assets/resources/photos/lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:'/admin/assets/resources/photos/lights.jpg', title:'Lights', desc:'Lorem ipsum...'}
+                 {url:imagePath+'lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', title:'Lights', desc:'Lorem ipsum...'}
             ]
         ];
     }

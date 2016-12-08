@@ -4,7 +4,7 @@ export const environment = {
   production: true,
   appMode: 'production',
   appVersion: '1.0.0',
-  appRoot: '/admin/',
+  baseUrl: '/admin/',
   apiUrl: '/api/',
   logLevel: LoggerLevel.WARN
 };
