@@ -1,2 +1,2 @@
 
-include "maplebox-core", "nail-api", "nail-admin"
+include "maplebox-core", "nail-api", "nail-admin-angular2"

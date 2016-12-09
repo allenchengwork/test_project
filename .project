@@ -29,7 +29,7 @@
 	</linkedResources>
 	<filteredResources>
 		<filter>
-			<id>1480899829843</id>
+			<id>1481247437019</id>
 			<name></name>
 			<type>26</type>
 			<matcher>
@@ -42,6 +42,10 @@
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>
 						<arguments>1.0-projectRelativePath-equals-true-false-nail-admin</arguments>
+					</matcher>
+					<matcher>
+						<id>org.eclipse.ui.ide.multiFilter</id>
+						<arguments>1.0-projectRelativePath-equals-true-false-nail-admin-angular2</arguments>
 					</matcher>
 					<matcher>
 						<id>org.eclipse.ui.ide.multiFilter</id>

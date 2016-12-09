@@ -113,8 +113,8 @@ public class AppInitializer implements WebApplicationInitializer {
 	}
     
     public static String getXmlConfigPath() {
-    	String mode = System.getProperty("web.mode", "dev");
-    	String developer = System.getProperty("web.developer", "");
+    	String mode = System.getProperty("app.mode", "dev");
+    	String developer = System.getProperty("app.developer", "");
     	return "config/web-config-"+mode+developer+".xml";
     }
 }

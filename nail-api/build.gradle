@@ -1,10 +1,10 @@
 apply plugin: 'war'
 
 ext {
-	webAppMode = 'dev'
-	webDeveloper = '@allen'
-	webAppName = 'nail-api'
-	webAppVersion = '00001'
+	appMode = 'dev'
+	appDeveloper = '@allen'
+	appName = 'nail-api'
+	appVersion = '00001'
 	
 	springVersion = '4.3.1.RELEASE'
 	hibernateVersion = '5.2.1.Final'
@@ -20,7 +20,7 @@ webAppDirName = 'src/main/webapp'
 dependencies {
 	runtime group: 'javax.servlet', name: 'jstl', version: '1.2' // 運行時
 	
-	compile group: 'javax.servlet', name: 'javax.servlet-api', version: '3.1.0'
+	compile group: 'javax.servlet', name: 'javax.servlet-api', version: appServletVersion
 	
 	compile group: 'org.springframework', name: 'spring-webmvc', version: "$springVersion"
 	compile group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
@@ -84,14 +84,23 @@ war {
     }
     rootSpec.eachFile {file ->
     	if (file.name.startsWith("web-config-") && file.name.endsWith(".xml")) {
-    		if (file.name != "web-config-${webAppMode}${webDeveloper}.xml") {
+    		if (file.name != "web-config-${appMode}${appDeveloper}.xml") {
     			file.exclude()
     		}
     	}
     }
-    destinationDir file("export/${webAppMode}")
-    archiveName "${webAppName}##${webAppVersion}.war"
+    destinationDir file("export/${appMode}")
+    archiveName "${appName}##${appVersion}.war"
     doLast {
     	println 'export war end'
+    }
+}
+
+eclipse {
+    wtp {
+        facet {
+            facet name: 'jst.web', version: appServletVersion
+            facet name: 'jst.java', version: appJavaVersion
+        }
     }
 }

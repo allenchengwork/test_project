@@ -44,7 +44,7 @@ import com.google.common.base.Charsets;
 	"com.maplebox.interceptor",
 	"com.maplebox.listener"})
 @PropertySource(
-	value = {"classpath:config/web-config-${web.mode:dev}${web.developer:}.xml"},
+	value = {"classpath:config/web-config-${app.mode:dev}${app.developer:}.xml"},
 	ignoreResourceNotFound = false
 )
 public class WebMvcConfig extends WebMvcConfigurerAdapter {
