@@ -7,10 +7,9 @@ import { environment } from '../environments/environment';
 
 import { Logger } from 'angular2-logger/core';
 
-import { Menu } from './model/menu';
+import { Menu } from './model/all-model';
 
-import { NavbarMenu } from './plugin/navbar-menu';
-import { SidebarMenu } from './plugin/sidebar-menu';
+import { NavbarMenuComponent, SidebarMenuComponent } from './plugin/all-plugin';
 
 import { MenuService } from './service/menu.service';
 
@@ -31,10 +30,9 @@ export class AppComponent {
         lg: 1200
     };
 
-    @ViewChild(NavbarMenu) navbarMenu: NavbarMenu;
+    @ViewChild(NavbarMenuComponent) navbarMenu: NavbarMenuComponent;
 
-    private menuList: Menu[];
-    @ViewChild(SidebarMenu) sidebarMenu: SidebarMenu;
+    @ViewChild(SidebarMenuComponent) sidebarMenu: SidebarMenuComponent;
     
     private appVersion:string;
     
@@ -42,6 +40,8 @@ export class AppComponent {
     
     private title:string = '';
     private smallTitle:string = '';
+    
+    private menuList: Menu[];
     
     private breadcrumb:Menu[] = [];
     

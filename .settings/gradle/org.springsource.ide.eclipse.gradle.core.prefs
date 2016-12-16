@@ -1,5 +1,5 @@
 #org.springsource.ide.eclipse.gradle.core.preferences.GradleProjectPreferences
-#Fri Dec 09 09:06:26 CST 2016
-build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;maplebox-core;nail-admin;nail-admin-angular2;nail-api;
+#Fri Dec 09 11:11:20 CST 2016
+build.family.org.gradle.tooling.model.eclipse.HierarchicalEclipseProject=;maplebox-core;nail-admin-angular2;nail-api;
 org.springsource.ide.eclipse.gradle.linkedresources=
 org.springsource.ide.eclipse.gradle.rootprojectloc=

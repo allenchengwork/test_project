@@ -6,7 +6,7 @@
   "apps": [
     {
       "root": "angular-src",
-      "outDir": "dist",
+      "outDir": "src/main/webapp/WEB-INF/dist",
       "assets": [
         "assets",
         "plugins/bootstrap-3.3.7",

@@ -1,13 +1,15 @@
 import { NgModule }             from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
-import { ImageManager }   from '../view/image-manager.view';
-import { DataManager }   from '../view/data-manager.view';
+import {
+    ImageManagerComponent, 
+    DataManagerComponent
+} from '../view/all-view';
 
 const routes: Routes = [
     { path: '', redirectTo: '/imageManager', pathMatch: 'full' },
-    { path: 'imageManager', component: ImageManager },
-    { path: 'dataManager', component: DataManager }
+    { path: 'imageManager', component: ImageManagerComponent },
+    { path: 'dataManager', component: DataManagerComponent }
 ];
 
 @NgModule({

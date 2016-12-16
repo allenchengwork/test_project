@@ -26,6 +26,7 @@
     "@ng-bootstrap/ng-bootstrap": "^1.0.0-alpha.14",
     "angular2-logger": "^0.5.1",
     "core-js": "^2.4.1",
+    "ng2-file-upload": "^1.1.4-2",
     "ng2-interceptors": "^1.2.1",
     "ng2-translate": "^4.0.1",
     "rxjs": "5.0.0-beta.12",

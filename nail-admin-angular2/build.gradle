@@ -6,9 +6,9 @@ ext {
 	appName = 'NailAdmin'
 	appVersion = '00001'
 	
-	springVersion = '4.3.1.RELEASE'
+	springVersion = '4.3.4.RELEASE'
 	jacksonVersion = '2.8.0'
-	log4jVersion = '2.6.2'
+	log4jVersion = '2.7'
 	aspectjVersion = '1.8.9'
 	javaMailVersion = '1.5.5'
 	imageIOVersion = '3.2.1'
@@ -21,24 +21,24 @@ dependencies {
 	
 	compile group: 'javax.servlet', name: 'javax.servlet-api', version: appServletVersion
 	
-	compile group: 'org.springframework', name: 'spring-webmvc', version: "$springVersion"
-	compile group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
-	compile group: 'org.springframework', name: 'spring-aspects', version: "$springVersion"
+	compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
+	compile group: 'org.springframework', name: 'spring-context-support', version: springVersion
+	compile group: 'org.springframework', name: 'spring-aspects', version: springVersion
 	
-	compile group: 'org.aspectj', name: 'aspectjweaver', version: "$aspectjVersion"
-	compile group: 'org.aspectj', name: 'aspectjrt', version: "$aspectjVersion"
+	compile group: 'org.aspectj', name: 'aspectjweaver', version: aspectjVersion
+	compile group: 'org.aspectj', name: 'aspectjrt', version: aspectjVersion
 	
 	compile group: 'org.freemarker', name: 'freemarker', version: '2.3.23'
 	
-	compile group: 'javax.mail', name: 'javax.mail-api', version: "$javaMailVersion"
+	compile group: 'javax.mail', name: 'javax.mail-api', version: javaMailVersion
 	
 	compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
 	
 	compile group: 'jmimemagic', name: 'jmimemagic', version: '0.1.2'
 	
-	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-core', version: "$imageIOVersion"
-	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-jpeg', version: "$imageIOVersion"
-	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-metadata', version: "$imageIOVersion"
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-core', version: imageIOVersion
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-jpeg', version: imageIOVersion
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-metadata', version: imageIOVersion
 	
 	compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.4.1'
 	
@@ -71,6 +71,17 @@ war {
     archiveName "${appName}##${appVersion}.war"
     doLast {
     	println 'export war end'
+    }
+}
+
+task ngBuildProd(type:Exec) {
+	doFirst {
+		println 'ngBuildProd start'
+	}
+    workingDir '.'
+    commandLine 'cmd', '/c', 'ng', 'build', '--target=production', '--environment=prod', '--base-href', '/admin/'
+    doLast {
+    	println 'ngBuildProd end'
     }
 }
 

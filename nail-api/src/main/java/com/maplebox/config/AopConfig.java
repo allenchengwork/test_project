@@ -4,7 +4,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-@ComponentScan(basePackages = {"com.maplebox.nail.aop"})
+@ComponentScan(basePackages = {"com.maplebox.aop"})
 public class AopConfig {
 
 }

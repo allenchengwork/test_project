@@ -6,5 +6,12 @@
 	<!-- App 設定 -->
 	<entry key="app.version">1.0.26</entry>
 	<entry key="app.mode">dev</entry>
-	<entry key="app.path">file:///D:/WebProject/MapleboxProject/nail-admin-angular2/dist/</entry>
+	<entry key="app.path">/WEB-INF/dist/</entry>
+	
+	<!-- App Filter 設定 -->
+	<entry key="url.exclude">
+		/index, /favicon.ico,
+		/app/, /assets/, /plugins/,
+		/inline., /main., /scripts., /styles., /vendor.
+	</entry>
 </properties>

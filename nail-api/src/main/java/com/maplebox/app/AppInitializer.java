@@ -11,6 +11,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
+import org.apache.logging.log4j.web.Log4jServletContextListener;
 import org.springframework.beans.factory.config.PropertyPlaceholderConfigurer;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.web.WebApplicationInitializer;
@@ -30,6 +31,9 @@ import net.bull.javamelody.SessionListener;
 import net.sf.ehcache.constructs.web.ShutdownListener;
 
 public class AppInitializer implements WebApplicationInitializer {
+	private static final String APP_MODE = "app.mode";
+	private static final String APP_DEVELOPER = "app.developer";
+	
 	private static final String KEY = "Maplebox123Key45";
 	private static final String IV = "RandomInitVector";
 	
@@ -37,12 +41,13 @@ public class AppInitializer implements WebApplicationInitializer {
 
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
-    	Properties webConfig = configProperties();
+    	Properties appConfig = configProperties();
     	
         WebApplicationContext context = getContext();
         servletContext.addListener(ShutdownListener.class);
         servletContext.addListener(new ContextLoaderListener(context));
         servletContext.addListener(SessionListener.class);
+        servletContext.addListener(Log4jServletContextListener.class);
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);
@@ -64,7 +69,7 @@ public class AppInitializer implements WebApplicationInitializer {
         ShallowEtagHeaderFilter shallowEtagHeaderFilter = new ShallowEtagHeaderFilter();
         filterRegistration = servletContext.addFilter("shallowEtagHeaderFilter", shallowEtagHeaderFilter);
         filterRegistration.addMappingForServletNames(null, true, "dispatcherServlet");
-        
+
         MonitoringFilter monitoringFilter = new MonitoringFilter();
         filterRegistration = servletContext.addFilter("javamelody", monitoringFilter);
         if (filterRegistration == null) {
@@ -72,10 +77,10 @@ public class AppInitializer implements WebApplicationInitializer {
         }
         filterRegistration.setAsyncSupported(true);
         Map<String, String> initParameters = new HashMap<>();
-        initParameters.put("disabled", webConfig.getProperty("javamelody.disabled"));
+        initParameters.put("disabled", appConfig.getProperty("javamelody.disabled"));
         initParameters.put("quartz-default-listener-disabled", "true");
-        initParameters.put("authorized-users", webConfig.getProperty("javamelody.authorized-users"));
-        initParameters.put("monitoring-path", webConfig.getProperty("javamelody.monitoring-path"));
+        initParameters.put("authorized-users", appConfig.getProperty("javamelody.authorized-users"));
+        initParameters.put("monitoring-path", appConfig.getProperty("javamelody.monitoring-path"));
         initParameters.put("url-exclude-pattern", "(/images/.*|/js/.*|/styles/.*)");
         
         filterRegistration.setInitParameters(initParameters);
@@ -113,8 +118,8 @@ public class AppInitializer implements WebApplicationInitializer {
 	}
     
     public static String getXmlConfigPath() {
-    	String mode = System.getProperty("app.mode", "dev");
-    	String developer = System.getProperty("app.developer", "");
+    	String mode = System.getProperty(APP_MODE, "dev");
+    	String developer = System.getProperty(APP_DEVELOPER, "");
     	return "config/web-config-"+mode+developer+".xml";
     }
 }

@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class TestTask {
-	private static Logger log = LoggerFactory.getLogger(TestTask.class);
+	static Logger log = LoggerFactory.getLogger(TestTask.class);
 	
 	@Autowired
 	private TaskScheduler taskScheduler;
@@ -21,21 +21,21 @@ public class TestTask {
 	
 	private ScheduledFuture<?> scheduledFuture;
 	
-	//@Scheduled(cron = "0 0/1 * * * MON-FRI")
+	@Scheduled(cron = "0 0/1 * * * MON-FRI")
 	public void doSomething() throws Exception {
 		log.debug("doSomething");
 	}
 	
-	//@Scheduled(fixedRateString = "${task.rate}")
+	@Scheduled(fixedRateString = "${task.rate}")
 	public void doTest() {
 		log.debug("doTest");
 	}
 	
 	public synchronized void taskSchedule(String cron) {
-		/*if (scheduledFuture != null) {
+		if (scheduledFuture != null) {
 			scheduledFuture.cancel(true);
-		}*/
-		taskScheduler.schedule(new Runnable() {
+		}
+		scheduledFuture = taskScheduler.schedule(new Runnable() {
 			private int number = 0;
 			private int count = 0;
 			
@@ -45,7 +45,7 @@ public class TestTask {
 					number = index;
 					index++;
 				}
-				//log.debug("*****taskSchedule*****>>>"+number+"<<<"+count);
+				log.debug("*****taskSchedule*****>>>"+number+"<<<"+count);
 				count++;
 			}
 		}, new CronTrigger(cron));

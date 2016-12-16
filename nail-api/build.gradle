@@ -6,10 +6,10 @@ ext {
 	appName = 'nail-api'
 	appVersion = '00001'
 	
-	springVersion = '4.3.1.RELEASE'
+	springVersion = '4.3.4.RELEASE'
 	hibernateVersion = '5.2.1.Final'
 	jacksonVersion = '2.8.0'
-	log4jVersion = '2.6.2'
+	log4jVersion = '2.7'
 	aspectjVersion = '1.8.9'
 	javaMailVersion = '1.5.5'
 	imageIOVersion = '3.2.1'
@@ -22,17 +22,17 @@ dependencies {
 	
 	compile group: 'javax.servlet', name: 'javax.servlet-api', version: appServletVersion
 	
-	compile group: 'org.springframework', name: 'spring-webmvc', version: "$springVersion"
-	compile group: 'org.springframework', name: 'spring-context-support', version: "$springVersion"
-	compile group: 'org.springframework', name: 'spring-tx', version: "$springVersion"
-	compile group: 'org.springframework', name: 'spring-orm', version: "$springVersion"
-	compile group: 'org.springframework', name: 'spring-aspects', version: "$springVersion"
+	compile group: 'org.springframework', name: 'spring-webmvc', version: springVersion
+	compile group: 'org.springframework', name: 'spring-context-support', version: springVersion
+	compile group: 'org.springframework', name: 'spring-tx', version: springVersion
+	compile group: 'org.springframework', name: 'spring-orm', version: springVersion
+	compile group: 'org.springframework', name: 'spring-aspects', version: springVersion
 	
 	compile group: 'org.springframework.data', name: 'spring-data-jpa', version: '1.10.2.RELEASE'
 	
-	compile group: 'org.hibernate', name: 'hibernate-core', version: "$hibernateVersion"
-	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: "$hibernateVersion"
-	compile group: 'org.hibernate', name: 'hibernate-java8', version: "$hibernateVersion"
+	compile group: 'org.hibernate', name: 'hibernate-core', version: hibernateVersion
+	compile group: 'org.hibernate', name: 'hibernate-entitymanager', version: hibernateVersion
+	compile group: 'org.hibernate', name: 'hibernate-java8', version: hibernateVersion
 	compile group: 'org.hibernate', name: 'hibernate-validator', version: '5.2.4.Final'
 	
 	compile group: 'mysql', name: 'mysql-connector-java', version: '5.1.39'
@@ -41,12 +41,12 @@ dependencies {
 	//compile group: 'org.apache.tomcat', name: 'tomcat-jdbc', version: '8.5.4'
 	//compile group: 'org.apache.commons', name: 'commons-dbcp2', version: '2.1.1'
 	
-	compile group: 'org.aspectj', name: 'aspectjweaver', version: "$aspectjVersion"
-	compile group: 'org.aspectj', name: 'aspectjrt', version: "$aspectjVersion"
+	compile group: 'org.aspectj', name: 'aspectjweaver', version: aspectjVersion
+	compile group: 'org.aspectj', name: 'aspectjrt', version: aspectjVersion
 	
 	compile group: 'org.freemarker', name: 'freemarker', version: '2.3.23'
 	
-	compile group: 'javax.mail', name: 'javax.mail-api', version: "$javaMailVersion"
+	compile group: 'javax.mail', name: 'javax.mail-api', version: javaMailVersion
 	
 	compile group: 'net.bull.javamelody', name: 'javamelody-core', version: '1.60.0'
 	
@@ -54,13 +54,13 @@ dependencies {
 	
 	compile group: 'org.imgscalr', name: 'imgscalr-lib', version: '4.2'
 	
-	compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.2.2.21'
+	compile group: 'net.sf.ehcache', name: 'ehcache', version: '2.10.3'
 	
 	compile group: 'jmimemagic', name: 'jmimemagic', version: '0.1.2'
 	
-	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-core', version: "$imageIOVersion"
-	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-jpeg', version: "$imageIOVersion"
-	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-metadata', version: "$imageIOVersion"
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-core', version: imageIOVersion
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-jpeg', version: imageIOVersion
+	compile group: 'com.twelvemonkeys.imageio', name: 'imageio-metadata', version: imageIOVersion
 	
 	compile group: 'com.squareup.okhttp3', name: 'okhttp', version: '3.4.1'
 	
@@ -71,6 +71,8 @@ dependencies {
 	compile group: 'xerces', name: 'xercesImpl', version: '2.11.0'
 	
 	compile group: 'com.github.penggle', name: 'kaptcha', version: '2.3.2'
+	
+	compile group: 'org.quartz-scheduler', name: 'quartz', version: '2.2.3'
 	
 	compile project(':maplebox-core')
 }

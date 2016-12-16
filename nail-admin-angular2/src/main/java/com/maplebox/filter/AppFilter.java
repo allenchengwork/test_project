@@ -1,6 +1,7 @@
 package com.maplebox.filter;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -10,11 +11,18 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 
+import com.google.common.base.Splitter;
+
 public class AppFilter implements Filter {
+	private List<String> listExclude;
+	
 	@Override
 	public void init(FilterConfig filterConfig) throws ServletException {
-		// TODO Auto-generated method stub
-		
+		String exclude = filterConfig.getInitParameter("exclude");
+		listExclude = Splitter.on(',')
+	    		.trimResults()
+	    		.omitEmptyStrings()
+	    		.splitToList(exclude);
 	}
 
 	@Override
@@ -40,13 +48,7 @@ public class AppFilter implements Filter {
 	}
 	
 	private boolean checkForwardIndex(String path) {
-		String[] exclude = new String[] {
-			"/index", "/favicon.ico",
-			"/app/", "/assets/", "/plugins/",
-			"/inline.", "/main.", "/scripts.", "/styles.", "/vendor."
-		};
-		
-		for (String ex : exclude) {
+		for (String ex : listExclude) {
 			if (path.startsWith(ex)) {
 				return false;
 			}

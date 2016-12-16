@@ -10,14 +10,14 @@ import { InterceptorService } from 'ng2-interceptors';
 
 import { BaseService } from './base.service';
 
-import { Menu } from '../model/menu';
+import { Menu } from '../model/all-model';
 
 @Injectable()
 export class MenuService extends BaseService {
     private static API_MAIN_NAVIGATION:string = 'menu/mainNavigation';
     
-    constructor(logger: Logger, @Inject("API_URL") apiUrl, http: InterceptorService) {
-        super(logger, apiUrl, http);
+    constructor(logger: Logger, @Inject("appSettings") appSettings, http: InterceptorService) {
+        super(logger, appSettings, http);
     }
 
     public listMenu(): Promise<Menu[]> {

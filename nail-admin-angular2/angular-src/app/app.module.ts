@@ -1,25 +1,22 @@
 import { NgModule }      from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { HttpModule, Http, XHRBackend, RequestOptions } from '@angular/http';
-import { CommonModule, APP_BASE_HREF } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { Http, XHRBackend, RequestOptions } from '@angular/http';
+import { APP_BASE_HREF } from '@angular/common';
+
+import { SharedModule } from './module/shared.module';
 
 import { environment } from '../environments/environment';
 
 import { InterceptorService } from 'ng2-interceptors';
 
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { Logger, Options as LoggerOptions, Level as LoggerLevel } from 'angular2-logger/core';
 
-import { Logger, Options as LoggerOptions, Level as LoggerLevel } from "angular2-logger/core";
-
-import { AppRoutingModule } from './module/app-routing.module';
-
-import { ViewModule } from './module/view.module';
-import { PluginModule } from './module/plugin.module';
+import { ViewModule, PluginModule } from './module/all-module';
 
 import { AppComponent }   from './app.component';
 
-import { ServerURLInterceptor } from './interceptor/server-url.interceptor';
+import { ImageModalComponent } from './plugin/all-plugin';
+
+import { ServerURLInterceptor } from './interceptor/server-url-interceptor.class';
 
 export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: RequestOptions, serverURLInterceptor: ServerURLInterceptor) {
     let service = new InterceptorService(xhrBackend, requestOptions);
@@ -29,12 +26,7 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
 
 @NgModule({
     imports: [
-        BrowserModule,
-        HttpModule,
-        CommonModule,
-        FormsModule,
-        AppRoutingModule, 
-        NgbModule.forRoot(), 
+        SharedModule,
         PluginModule,
         ViewModule
     ],
@@ -42,10 +34,7 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
         AppComponent
     ],
     providers: [
-       {provide: 'APP_MODE', useValue: environment.appMode},
-       {provide: 'APP_VERSION', useValue: environment.appVersion},
-       {provide: 'BASE_URL', useValue:environment.baseUrl},
-       {provide: 'API_URL', useValue:environment.apiUrl},
+       {provide: 'appSettings', useValue: environment},
        {provide: APP_BASE_HREF, useValue: environment.baseUrl},
        Logger,
        {provide: LoggerOptions, useValue: {level: environment.logLevel}},
@@ -56,6 +45,7 @@ export function interceptorFactory(xhrBackend: XHRBackend, requestOptions: Reque
            deps: [XHRBackend, RequestOptions, ServerURLInterceptor]
        }
     ],
+    entryComponents: [ ImageModalComponent ],
     bootstrap: [ AppComponent ]
 })
 export class AppModule { }

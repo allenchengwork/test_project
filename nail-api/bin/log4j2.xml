@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE configuration>
-<Configuration monitorInterval="60" status="DEBUG">
+<Configuration monitorInterval="60" status="TRACE">
 	<Properties>
 		<Property name="api.name">${sys:api.name}</Property>
 		<Property name="web.package">com.maplebox</Property>
@@ -19,17 +19,6 @@
 	    </Console>
 	    <RollingFile name="FILE" fileName="${log.dir}/root.log"
                      filePattern="${log.dir}/root-${file.pattern}.log">
-            <PatternLayout>
-                <Pattern>${pattern}</Pattern>
-            </PatternLayout>
-            <Policies>
-                <TimeBasedTriggeringPolicy />
-                <SizeBasedTriggeringPolicy size="100 MB" />
-            </Policies>
-            <DefaultRolloverStrategy max="20" />
-        </RollingFile>
-        <RollingFile name="EXP_FILE" fileName="${log.dir}/exp.log"
-                     filePattern="${log.dir}/exp-${file.pattern}.log">
             <PatternLayout>
                 <Pattern>${pattern}</Pattern>
             </PatternLayout>
@@ -64,11 +53,6 @@
 	</Appenders>
 	
 	<Loggers>
-		<Logger name="${web.package}.controller.advice.ControllerHandler" level="${app.log.level}" additivity="false">
-			<AppenderRef ref="STDOUT" />
-			<AppenderRef ref="EXP_FILE" />
-		</Logger>
-		
 		<Logger name="${web.package}.task" level="${app.log.level}" additivity="false">
 			<AppenderRef ref="STDOUT" />
 			<AppenderRef ref="TASK_FILE" />

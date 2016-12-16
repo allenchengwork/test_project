@@ -10,12 +10,12 @@ import { InterceptorService } from 'ng2-interceptors';
 
 @Injectable()
 export class BaseService {
-    constructor(private logger: Logger, private apiUrl: string, protected http: InterceptorService) {
+    constructor(private logger: Logger, private appSettings: any, protected http: InterceptorService) {
         
     }
     
     protected getAdminApi(apiName): string {
-        let apiPath = this.apiUrl + "admin/" + apiName;;
+        let apiPath = this.appSettings.apiUrl + "admin/" + apiName;;
         this.logger.info('getAdminApi', apiPath);
         return apiPath;
     }

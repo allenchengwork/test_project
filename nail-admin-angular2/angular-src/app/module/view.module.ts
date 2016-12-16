@@ -1,17 +1,19 @@
 import { NgModule } from '@angular/core';
-import { BrowserModule } from '@angular/platform-browser';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { AppRoutingModule } from './app-routing.module';
+import { SharedModule } from './shared.module';
 
-import { ImageManager } from '../view/image-manager.view';
-import { DataManager } from '../view/data-manager.view';
+import { PluginModule } from './plugin.module';
+
+import { 
+    ImageManagerComponent, 
+    DataManagerComponent 
+} from '../view/all-view';
 
 export const VIEW_MODULES = [
-    ImageManager, DataManager
+    ImageManagerComponent, DataManagerComponent
 ];
 
 @NgModule({
-    imports: [BrowserModule, AppRoutingModule, NgbModule.forRoot()],
+    imports: [SharedModule, PluginModule],
     exports: VIEW_MODULES,
     declarations: VIEW_MODULES
 })
