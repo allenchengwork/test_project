@@ -2,6 +2,7 @@ import { Component, Inject } from '@angular/core';
 import { Router, ActivatedRoute, Params } from '@angular/router';
 import { Location } from '@angular/common';
 
+import { Logger } from 'angular2-logger/core';
 import { NgbModal, NgbActiveModal, ModalDismissReasons } from '@ng-bootstrap/ng-bootstrap';
 
 import { ImageModalComponent } from '../plugin/all-plugin';
@@ -17,7 +18,9 @@ export class ImageManagerComponent {
     private labelList:Label[] = [];
     private imageList:Photo[][] = [];
 
-    constructor(@Inject("appSettings") private appSettings:any, private modalService: NgbModal) {
+    constructor(private logger: Logger, 
+            @Inject("appSettings") private appSettings:any, 
+            private modalService: NgbModal) {
     }
 
     ngOnInit() {
@@ -33,18 +36,18 @@ export class ImageManagerComponent {
         let imagePath = this.appSettings.baseUrl+'assets/photos/';
         this.imageList = [
             [
-                 {url:imagePath+'lights.jpg', file: null, title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'fjords.jpg', file: null, title:'Fjords', desc:'Lorem ipsum...'},
-                 {url:imagePath+'nature.jpg', file: null, title:'Nature', desc:'這是說明文字...'},
-                 {url:imagePath+'unnamed.png', file: null, title:'Unnamed', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, title:'Lights', desc:'Lorem ipsum...'}
+                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'fjords.jpg', file: null, fileName: '', photoName: '', title:'Fjords', desc:'Lorem ipsum...'},
+                 {url:imagePath+'nature.jpg', file: null, fileName: '', photoName: '', title:'Nature', desc:'這是說明文字...'},
+                 {url:imagePath+'unnamed.png', file: null, fileName: '', photoName: '', title:'Unnamed', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'}
             ],
             [
-                 {url:imagePath+'lights.jpg', file: null, title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, title:'Lights', desc:'Lorem ipsum...'}
+                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'}
             ]
         ];
     }
@@ -58,9 +61,9 @@ export class ImageManagerComponent {
         modalRef.componentInstance.title = '圖片編輯';
         modalRef.componentInstance.item = item;
         modalRef.result.then((result) => {
-            console.log(`Closed with: ${result}`);
+            this.logger.debug(`Closed with: ${result}`);
         }, (reason) => {
-            console.log(`Dismissed ${this.getDismissReason(reason)}`);
+            this.logger.debug(`Dismissed ${this.getDismissReason(reason)}`);
         });
     }
     

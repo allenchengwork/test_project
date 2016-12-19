@@ -8,10 +8,10 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRegistration;
 
-import org.apache.logging.log4j.web.Log4jServletContextListener;
 import org.springframework.web.WebApplicationInitializer;
 import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.WebApplicationContext;
+import org.springframework.web.context.request.RequestContextListener;
 import org.springframework.web.context.support.AnnotationConfigWebApplicationContext;
 import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.filter.ShallowEtagHeaderFilter;
@@ -31,7 +31,9 @@ public class AppInitializer implements WebApplicationInitializer {
     	
         WebApplicationContext context = getContext();
         servletContext.addListener(new ContextLoaderListener(context));
-        servletContext.addListener(Log4jServletContextListener.class);
+        servletContext.addListener(new RequestContextListener());
+        
+        servletContext.setAttribute("isLog4jAutoInitializationDisabled", false);
 
         DispatcherServlet dispatcherServlet = new DispatcherServlet(context);
         dispatcherServlet.setThrowExceptionIfNoHandlerFound(true);

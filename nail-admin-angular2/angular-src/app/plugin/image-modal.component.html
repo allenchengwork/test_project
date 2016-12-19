@@ -1,3 +1,4 @@
+<form [formGroup]="photoForm" (ngSubmit)="onSubmit()">
 <div class="modal-header">
 	<button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss('Cross click')">
 		<span aria-hidden="true">&times;</span>
@@ -5,28 +6,32 @@
 	<h4 class="modal-title">{{title}}</h4>
 </div>
 <div class="modal-body">
-	<div class="form-group has-error">
+	<div class="form-group">
 		<img [src]="item.url" [alt]="item.title" [title]="item.title" class="img-rounded" />
 	</div>
-	<div class="form-group has-error">
+	<div class="form-group">
 		<label for="fileUpload">上傳檔案</label>
 		<div class="input-group">
             <label class="input-group-btn">
                 <span class="btn btn-primary">
-					檔案… <input id="fileUpload" [(ngModel)]="item.file" type="file" (change)="uploadFile($event)" />
+					檔案… <input formControlName="file" id="fileUpload" name="fileUpload" type="file" (change)="uploadFile($event)" />
                 </span>
             </label>
-            <input type="text" class="form-control" readonly />
+            <input type="text" class="form-control" [value]="item.fileName" readonly />
         </div>
 		<span class="help-block">Help block with error</span>
 	</div>
-	<div class="form-group has-error">
-		<label for="picName">圖片名稱</label>
-		<input id="picName" type="text" class="form-control" />
-		<span class="help-block">Help block with error</span>
+	<div class="form-group" [ngClass]="{'has-error': formErrors.photoName}">
+		<label for="photoName">圖片名稱</label>
+		<input formControlName="photoName" id="photoName" name="photoName" type="text" class="form-control"
+			required />
+		<span *ngIf="formErrors.photoName" class="help-block">
+			{{formErrors.photoName}}
+        </span>
 	</div>
 </div>
 <div class="modal-footer">
-	<button type="button" class="btn btn-primary pull-left">儲存</button>
+	<button type="submit" [disabled]="!photoForm.valid" class="btn btn-primary pull-left">儲存</button>
 	<button type="button" class="btn btn-secondary" (click)="activeModal.close('Close click')">關閉</button>
 </div>
+</form>

@@ -1,0 +1,11 @@
+{
+	"validationMessages": {
+		"photoName": {
+			"required": "圖片名稱必需輸入",
+			"minlength": "最少要有3個字元",
+			"maxlength": "最多只能10個字元",
+			"pattern": "只能輸入英數字",
+			"forbiddenName": "請勿輸入bob字元"
+		}
+	}
+}

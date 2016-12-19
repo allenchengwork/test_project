@@ -1,0 +1,11 @@
+{
+	"validationMessages": {
+		"photoName": {
+			"required": "photoName is must",
+			"minlength": "minlength 3 character",
+			"maxlength": "maxlength 10 character",
+			"pattern": "character number or english",
+			"forbiddenName": "no input bob"
+		}
+	}
+}
