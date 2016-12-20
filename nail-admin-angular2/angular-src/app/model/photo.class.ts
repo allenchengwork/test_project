@@ -1,7 +1,7 @@
 export class Photo {
     title: string = '';
     url: string = '';
-    file: File = null;
+    photoFile: any = null;
     fileName: string = '';
     photoName: string = '';
     desc: string = '';

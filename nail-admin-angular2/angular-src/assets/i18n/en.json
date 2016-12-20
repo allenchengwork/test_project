@@ -1,5 +1,9 @@
 {
 	"validationMessages": {
+		"fileName": {
+			"required": "must upload file",
+			"dataExists": "data exists"
+		},
 		"photoName": {
 			"required": "photoName is must",
 			"minlength": "minlength 3 character",

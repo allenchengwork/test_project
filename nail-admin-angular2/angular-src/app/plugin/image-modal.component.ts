@@ -1,14 +1,12 @@
 import { Component, Input, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, AbstractControl } from '@angular/forms';
 
 import { Logger } from 'angular2-logger/core';
 import { NgbModal, NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateService } from 'ng2-translate/ng2-translate';
 
-import { forbiddenNameValidator } from '../directive/all-directive';
+import { forbiddenNameValidator, dataExistsValidator } from '../directive/all-directive';
 import { Photo } from '../model/all-model';
-
-const URL = 'http://127.0.0.1:9030/api';
 
 @Component({
     selector: 'image-modal',
@@ -24,13 +22,12 @@ export class ImageModalComponent {
     
     private photoForm: FormGroup;
     
-    public hasBaseDropZoneOver:boolean = false;
-    
     private validationMessages: any;
     
     private translateSub: any;
     
     private formErrors = {
+        'fileName': '',
         'photoName': ''
     };
 
@@ -45,7 +42,7 @@ export class ImageModalComponent {
 
     onSubmit() {
         this.submitted = true;
-        this.logger.debug('onSubmit');
+        this.saveItem(this.item);
     }
     
     ngOnInit() {
@@ -65,7 +62,10 @@ export class ImageModalComponent {
     uploadFile(event) {
         if (event.target.files && event.target.files[0]) {
             let file:File = event.target.files[0];
-            this.item.fileName = file.name;
+            this.item.photoFile = file;
+            let control: AbstractControl = this.photoForm.controls['fileName'];
+            control.setValue(file.name);
+            control.markAsDirty();
             
             let reader = new FileReader();
             reader.onload = (e:ProgressEvent) => {
@@ -77,19 +77,16 @@ export class ImageModalComponent {
         }
     }
     
-    public fileOverBase(e:any) {
-        this.hasBaseDropZoneOver = e;
-    }
-    
     ngAfterViewChecked() {
         this.logger.debug('ngAfterViewChecked');
     }
     
     buildForm() {
         this.photoForm = this.fb.group({
-            'file': [this.item.file, [
-                Validators.required
-            ]],
+            'fileName': [this.item.fileName, 
+                [Validators.required],
+                [dataExistsValidator('apiUrl')]
+            ],
             'photoName': [this.item.photoName, [
                 Validators.required,
                 Validators.minLength(3),
@@ -99,8 +96,11 @@ export class ImageModalComponent {
             ]]
         });
 
-        this.photoForm.valueChanges
-          .subscribe(data => this.onValueChanged(data));
+        //this.photoForm.valueChanges.subscribe(data => this.onValueChanged(data));
+        this.photoForm.statusChanges.subscribe(data => {
+            this.logger.debug('statusChanges', data);
+            this.onValueChanged(data)
+        });
 
         this.onValueChanged(); // (re)set validation messages now
     }
@@ -112,7 +112,8 @@ export class ImageModalComponent {
         for (const field in this.formErrors) {
             this.formErrors[field] = '';
             const control = form.get(field);
-
+            
+            this.logger.debug(data+', '+control.dirty+', '+control.valid);
             if (control && control.dirty && !control.valid) {
                 const messages = this.validationMessages[field];
                 for (const key in control.errors) {
@@ -123,5 +124,9 @@ export class ImageModalComponent {
                 }
             }
         }
+    }
+    
+    saveItem(item) {
+        
     }
 }

@@ -1,5 +1,9 @@
 {
 	"validationMessages": {
+		"fileName": {
+			"required": "必需上傳檔案",
+			"dataExists": "資料已存在"
+		},
 		"photoName": {
 			"required": "圖片名稱必需輸入",
 			"minlength": "最少要有3個字元",

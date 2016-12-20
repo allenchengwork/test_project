@@ -36,18 +36,18 @@ export class ImageManagerComponent {
         let imagePath = this.appSettings.baseUrl+'assets/photos/';
         this.imageList = [
             [
-                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'fjords.jpg', file: null, fileName: '', photoName: '', title:'Fjords', desc:'Lorem ipsum...'},
-                 {url:imagePath+'nature.jpg', file: null, fileName: '', photoName: '', title:'Nature', desc:'這是說明文字...'},
-                 {url:imagePath+'unnamed.png', file: null, fileName: '', photoName: '', title:'Unnamed', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'}
+                 {url:imagePath+'lights.jpg', photoFile: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'fjords.jpg', photoFile: null, fileName: '', photoName: '', title:'Fjords', desc:'Lorem ipsum...'},
+                 {url:imagePath+'nature.jpg', photoFile: null, fileName: '', photoName: '', title:'Nature', desc:'這是說明文字...'},
+                 {url:imagePath+'unnamed.png', photoFile: null, fileName: '', photoName: '', title:'Unnamed', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', photoFile: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'}
             ],
             [
-                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
-                 {url:imagePath+'lights.jpg', file: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'}
+                 {url:imagePath+'lights.jpg', photoFile: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', photoFile: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', photoFile: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', photoFile: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'},
+                 {url:imagePath+'lights.jpg', photoFile: null, fileName: '', photoName: '', title:'Lights', desc:'Lorem ipsum...'}
             ]
         ];
     }
@@ -59,7 +59,13 @@ export class ImageManagerComponent {
     editImage(item) {
         const modalRef = this.modalService.open(ImageModalComponent);
         modalRef.componentInstance.title = '圖片編輯';
-        modalRef.componentInstance.item = item;
+        modalRef.componentInstance.item = Object.assign({}, item);
+        let recItem = item;
+        modalRef.componentInstance.saveItem = (item) => {
+            this.logger.debug('saveItem', item);
+            Object.assign(recItem, item);
+            modalRef.close('saveItem');
+        };
         modalRef.result.then((result) => {
             this.logger.debug(`Closed with: ${result}`);
         }, (reason) => {

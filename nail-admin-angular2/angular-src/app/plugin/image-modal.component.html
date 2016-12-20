@@ -9,26 +9,29 @@
 	<div class="form-group">
 		<img [src]="item.url" [alt]="item.title" [title]="item.title" class="img-rounded" />
 	</div>
-	<div class="form-group">
+	<div class="form-group" [ngClass]="{'has-error': formErrors.fileName}">
 		<label for="fileUpload">上傳檔案</label>
 		<div class="input-group">
             <label class="input-group-btn">
                 <span class="btn btn-primary">
-					檔案… <input formControlName="file" id="fileUpload" name="fileUpload" type="file" (change)="uploadFile($event)" />
+					檔案… <input type="file" (change)="uploadFile($event)" />
                 </span>
             </label>
-            <input type="text" class="form-control" [value]="item.fileName" readonly />
+            <input formControlName="fileName" [(ngModel)]="item.fileName" type="text" class="form-control" />
         </div>
-		<span class="help-block">Help block with error</span>
+		<span *ngIf="formErrors.fileName" class="help-block">
+			{{formErrors.fileName}}
+		</span>
 	</div>
 	<div class="form-group" [ngClass]="{'has-error': formErrors.photoName}">
 		<label for="photoName">圖片名稱</label>
-		<input formControlName="photoName" id="photoName" name="photoName" type="text" class="form-control"
-			required />
+		<input formControlName="photoName" [(ngModel)]="item.photoName" type="text" class="form-control" />
 		<span *ngIf="formErrors.photoName" class="help-block">
 			{{formErrors.photoName}}
         </span>
 	</div>
+	<p>Value: {{ photoForm.value | json }}</p>
+    <p>Validation status: {{ photoForm.status }}</p>
 </div>
 <div class="modal-footer">
 	<button type="submit" [disabled]="!photoForm.valid" class="btn btn-primary pull-left">儲存</button>

@@ -12,6 +12,10 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-translate/ng2-translate';
 
+export function createTranslateLoader(http: InterceptorService) {
+    return new TranslateStaticLoader(http, './assets/i18n', '.json');
+}
+
 @NgModule({
     imports: [
         BrowserModule, HttpModule,
@@ -21,7 +25,7 @@ import { TranslateModule, TranslateLoader, TranslateStaticLoader } from 'ng2-tra
         AppRoutingModule,
         TranslateModule.forRoot({
             provide: TranslateLoader,
-            useFactory: (http: InterceptorService) => new TranslateStaticLoader(http, '/assets/i18n', '.json'),
+            useFactory: (createTranslateLoader),
             deps: [InterceptorService]
         })
     ],
